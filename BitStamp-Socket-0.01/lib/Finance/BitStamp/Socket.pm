@@ -131,16 +131,15 @@ sub on_read {
                 $d = $self->json->decode($msg);
             } or do {
                 my $e = $@;
-                warn $self->now . " - error: $e";
+                warn $self->now . ' - error: ' . $e;
                 next;
             };
             given ($d->{event}) {
 
                 when ('pusher:connection_established') {
                     say $self->now . ' - subscribing to events' if VERBOSE;
-                    #foreach my $channel ($self->channels) {
                     foreach my $channel (@{$self->channels}) {
-                        say $self->now . " - requesting channel: $channel" if VERBOSE;
+                        say $self->now . ' - requesting channel: ' . $channel if VERBOSE;
                         $handle->push_write(
                             $self->frame->new($self->json->encode({
                                 event => 'pusher:subscribe',
@@ -163,7 +162,7 @@ sub on_read {
                         $self->trade($data);
                     }
                     else {
-                        printf "%s - got event: ", $self->now, Dumper $d if VERBOSE;
+                        printf "%s - got event: %s", $self->now, Dumper $d if VERBOSE;
                     }
                 }
                 when ('data') {
@@ -173,12 +172,12 @@ sub on_read {
                         $self->order_book($data);
                     }
                     else {
-                        printf "%s - got event: ", $self->now, Dumper $d if VERBOSE;
+                        printf '%s - got event: %s', $self->now, Dumper $d if VERBOSE;
                     }
                 }
 
                 default {
-                    printf "%s - got event: ", $self->now, Dumper $d if VERBOSE;
+                    printf '%s - got event: %s', $self->now, Dumper $d if VERBOSE;
                 }
             }
         }

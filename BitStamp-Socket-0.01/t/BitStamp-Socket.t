@@ -16,7 +16,7 @@ BEGIN { use_ok('Finance::BitStamp::Socket') };
 diag q{
 You should just test from the command line with:
 
- $ perl -e 'use base qw(Finance::BitStamp::Socket); main->new->go'
+ $ perl -e 'use lib qw(lib); use base qw(Finance::BitStamp::Socket); main->new->go'
 
 You should see text socket broadcasts from BitStamp dump to the screen
 
