@@ -6,6 +6,7 @@ WriteMakefile(
     NAME              => 'Finance::BitStamp::Socket',
     VERSION_FROM      => 'lib/Finance/BitStamp/Socket.pm', # finds $VERSION
     PREREQ_PM         => {
+        'JSON'                                   => 0,
         'AnyEvent::Socket'                       => 0,
         'AnyEvent::Handle'                       => 0,
         'Protocol::WebSocket::Handshake::Client' => 0,
